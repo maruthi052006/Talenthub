@@ -1,0 +1,392 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/apexa png.png' %}">
+    <title>Ciet Talent Hub</title>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.1.0/mdb.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- AOS Library CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar fixed-top navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="{% static 'img/ciet logo.jpg' %}" width="70px" height="50px"
+                    alt=""></a>
+            <button class="navbar-toggler" type="button" id="sidebarToggle">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-list"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <a class="navbar-brand" href="#"><img src="{% static 'img/ciet.png' %}" width="60px" height="40px"
+                    alt=""></a>
+            <button id="sidebarClose" class="btn-close text-reset"></button>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="/index">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="/postd">Posts</a></li>
+            <li class="nav-item"><a class="nav-link" href="">Fields</a></li>
+            <li class="nav-item"><a class="nav-link" href="/clubs">Clubs</a></li>
+            <li class="nav-item"><a class="nav-link" href="/startup">Startup</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            <li class="nav-item">
+                <a href="/signup">
+                    <button type="button" class="btn btn-outline-primary w-100">
+                        Sign up
+                    </button>
+                </a>
+            </li>
+            <br>
+            <li class="nav-item">
+                <a href="/logout">
+                    <button type="button" class="btn btn-outline-danger w-100">
+                        Log out
+                    </button>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="" style="margin-top: 90px; display: flex; align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.694), rgba(0, 0, 0, 0.5)), 
+    url('{% static " img/index.jpg" %}') no-repeat center center/cover;">
+
+
+        <div class="container justify-content-center align-items-center">
+            <div class="row justify-content-center align-items-center p-2">
+                <div class="col-lg-10" style="margin-left: 40%;">
+                </div>
+                <!-- Tabs -->
+                <ul class="nav nav-tabs justify-content-center mt-4" id="profileTabs" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#student"
+                            type="button" role="tab">Student</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#faculty"
+                            type="button" role="tab">Faculty</button>
+                    </li>
+                </ul>
+
+
+                <div class="rounded-4 p-4 text-dark col-lg-5" style="background-color: rgba(255, 255, 255, 0.471);">
+                    <div class="tab-content">
+                        <!-- Student Tab -->
+                        <div id="student" class="tab-pane fade show active" role="tabpanel">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" name="form_type" value="student">
+                                <!-- first name -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">First Name <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <input type="text" name="first_name" placeholder="First Name"
+                                        class="form-control form-control" />
+                                </div>
+
+                                <!-- last name -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Last Name <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <input type="text" name="last_name" placeholder="Last Name"
+                                        class="form-control form-control" />
+                                </div>
+
+                                <!-- roll_no -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Roll no <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <input type="text" name="roll_no" placeholder="(ex:23BAI000)"
+                                        class="form-control form-control" />
+                                </div>
+
+                                <!-- reg_no -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Reg no <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <input type="text" name="reg_no" placeholder="(ex:71052308000)"
+                                        class="form-control form-control" />
+                                </div>
+
+                                <!-- department -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Department <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label"></label>
+                                        <select class="form-select form-select" name="dep" id="">
+                                            <option selected>-- Select dep --</option>
+                                            <option value="AI & DS">AI & DS</option>
+                                            <option value="IT">IT</option>
+                                            <option value="CSE">CSE</option>
+                                            <option value="CSE(CS)">CSE(CS)</option>
+                                            <option value="ECE">ECE</option>
+                                            <option value="EEE">EEE</option>
+                                            <option value="CIVIL">CIVIL</option>
+                                            <option value="MECH">MECH</option>
+                                            <option value="MCT">MCT</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- year -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Year <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label"></label>
+                                        <select class="form-select form-select" name="year" id="">
+                                            <option selected>-- Select Year --</option>
+                                            <option value="2024-28">2024-28</option>
+                                            <option value="2023-27">2023-27</option>
+                                            <option value="2022-26">2022-26</option>
+                                            <option value="2021-25">2021-25</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Password -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Password <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <input type="password" name="password" placeholder="Password"
+                                        class="form-control form-control" />
+                                </div>
+
+                                <!-- email -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Email<span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <input type="email" name="email" placeholder="(ex:apexa.tech19@gmail.com)"
+                                        class="form-control form-control" />
+                                </div>
+
+                                <!-- ph_no -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Ph No<span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <input type="tel" name="ph_no" placeholder="(ex:9080100000)"
+                                        class="form-control form-control" />
+                                </div>
+
+                                <!-- profile_pic -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Profile picture <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="file" name="profile_pic" placeholder=""
+                                            class="btn btn-outline-dark" />
+                                    </div>
+                                </div>
+
+                                <!-- hostel -->
+                                <div class="text-center">
+                                    <span>
+                                        <input class="form-check-input" type="radio" value="Hostel" name="hostel" />
+                                        <label class="form-check-label" for=""> Hostel</label>
+                                    </span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span>
+                                        <input class="form-check-input" type="radio" name="hostel"
+                                            value="Day scholar" />
+                                        <label class="form-check-label" for=""> Day scholar</label>
+                                    </span>
+                                </div>
+                                <br>
+                                <!-- Submit button -->
+                                <input value="Save" type="submit" class="btn"
+                                    style="background-color: rgb(137, 168, 178); margin-left: 40%;">
+                            </form>
+                        </div>
+
+                        <!-- Faculty Tab -->
+                        <div id="faculty" class="tab-pane fade" role="tabpanel">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" name="form_type" value="faculty">
+                                <!-- User name -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Username <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <input type="text" name="username" placeholder="(ex:Arun P)"
+                                        class="form-control form-control" />
+                                </div>
+
+
+                                <!-- user_id -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">User ID <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <input type="text" name="user_id" placeholder="(ex:23BAI000)"
+                                        class="form-control form-control" />
+                                </div>
+
+                                <!-- department -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Department <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label"></label>
+                                        <select class="form-select form-select" name="dep" id="">
+                                            <option selected>-- Select Department --</option>
+                                            <option value="Artificial Intelligence & Data Science">Artificial
+                                                Intelligence & Data Science</option>
+                                            <option value="Computer Science Engineering">Computer Science Engineering
+                                            </option>
+                                            <option value="Information Technology">Information Technology</option>
+                                            <option value="Electronics and Communication Engineering">Electronics and
+                                                Communication Engineering</option>
+                                            <option value="Electrical and Electronics Engineering">Electrical and
+                                                Electronics Engineering</option>
+                                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                            <option value="Civil Engineering">Civil Engineering</option>
+                                            <option value="Mechatronics">Mechatronics</option>
+                                            <option value="Tamil">Tamil</option>
+                                            <option value="English">English</option>
+                                            <option value="Mathematics">Mathematics</option>
+                                            <option value="Physics">Physics</option>
+                                            <option value="Chemistry">Chemistry</option>
+                                            <option value="Physical Education">Physical Education</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <!-- Password -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Password <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <input type="password" name="password" placeholder="Password"
+                                        class="form-control form-control" />
+                                </div>
+
+                                <!-- email -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Email<span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <input type="email" name="email" placeholder="(ex:apexa.tech19@gmail.com)"
+                                        class="form-control form-control" />
+                                </div>
+
+                                <!-- ph_no -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Ph No<span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <input type="tel" name="ph_no" placeholder="(ex:9080100000)"
+                                        class="form-control form-control" />
+                                </div>
+
+                                <!-- profile_pic -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Profile picture <span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="file" name="profile_pic" placeholder=""
+                                            class="btn btn-outline-dark" />
+                                    </div>
+                                </div>
+
+                                <!-- status -->
+                                <div class="col-md-12 mb-4">
+                                    <label for="" style="font-size: large;">Designation<span class="text-danger"
+                                            style="font-size: x-large;">*</span></label>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label"></label>
+                                        <select class="form-select form-select" name="hostel" id="">
+                                            <option selected>-- Select --</option>
+                                            <option value="Head Of the Department">Head Of the Department</option>
+                                            <option value="Professor">Professor</option>
+                                            <option value="Assistant Professor">Assistant Professor</option>
+                                            <option value="Lab Technician">Lab Technician</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Submit button -->
+                                <input value="Save" type="submit" class="btn"
+                                    style="background-color: rgb(137, 168, 178); margin-left: 40%;">
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>About Us</h5>
+                    <p>We are a team of creative designers and developers building modern websites with Bootstrap.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">About</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Services</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Portfolio</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Follow Us</h5>
+                    <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="text-center border-top pt-3 mt-4">
+                <p>&copy; 2024 Apexa. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll-to-Top Button -->
+    <button class="scroll-to-top" id="scrollToTopBtn">
+        ↑
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Library JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script src="{% static '/js/style.js' %}"></script>
+    <script>
+
+
+    </script>
+</body>
+
+</html>

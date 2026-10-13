@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<style>
+    .story-circle {
+        border: 2px solid #f05d23;
+        /* Instagram-like border color */
+        padding: 2px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .story-circle:hover {
+        transform: scale(1.1);
+        /* Slight zoom effect on hover */
+    }
+</style>
+
+<div class="container my-4">
+    <div class="row">
+
+        <!-- Stories Section -->
+        <div class="col-md-3" style="margin-top: 5px;">
+            <div class="card p-3">
+                <h6 class="mb-3">Story
+                    <!-- Plus Button to Trigger Modal -->
+                    {% if user.people == 'faculty' %}
+                    <i class="bi bi-plus-circle" style="cursor: pointer;" data-bs-toggle="modal"
+                        data-bs-target="#uploadStoryModal"></i>
+                    {% endif %}
+                </h6>
+
+                {% if stories %}
+                <div class="d-flex flex-wrap">
+                    {% for story in stories %}
+                    <div class="story-thumbnail m-2" style="position: relative; cursor: pointer;">
+                        <!-- Story Circle -->
+                        {% if story.media.url|slice:"-4" == ".mp4" %}
+                        <video class="rounded-circle story-circle" width="70" height="70" data-bs-toggle="modal"
+                            data-bs-target="#storyModal{{ forloop.counter }}">
+                            <source src="{{ story.media.url }}" type="video/mp4">
+                        </video>
+                        {% else %}
+                        <img src="{{ story.media.url }}" class="rounded-circle story-circle" width="70" height="70"
+                            style="object-fit: cover;" data-bs-toggle="modal"
+                            data-bs-target="#storyModal{{ forloop.counter }}">
+                        {% endif %}
+                    </div>
+
+                    <!-- Modal for Full Size Story -->
+                    <div class="modal fade" id="storyModal{{ forloop.counter }}" tabindex="-1"
+                        aria-labelledby="storyModalLabel{{ forloop.counter }}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="storyModalLabel{{ forloop.counter }}">
+                                        Posted by: {{ story.user.username }}
+                                    </h6>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    {% if story.media.url|slice:"-4" == ".mp4" %}
+                                    <video controls class="img-fluid w-100">
+                                        <source src="{{ story.media.url }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    {% else %}
+                                    <img src="{{ story.media.url }}" class="img-fluid" alt="Story Image">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p>No active stories at the moment.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Upload Story Modal -->
+        <div class="modal fade" id="uploadStoryModal" tabindex="-1" aria-labelledby="uploadStoryModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="uploadStoryModalLabel">Upload Your Story</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="form_type" value="story">
+                            <div class="mb-3">
+                                <label for="storyMedia" class="form-label">Choose an image or video</label>
+                                <input class="form-control" type="file" name="media" id="storyMedia"
+                                    accept="image/*,video/*" required>
+                            </div>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Main Content -->
+        <div class="col-md-6 scrollable-content" style="margin-top: 3px;">
+            {% if user.people == 'faculty' %}
+            <div class="card p-3 mb-3">
+                <form method="POST" enctype="multipart/form-data" action="{% url 'post' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="post">
+                    <textarea class="form-control mb-2" name="content" rows="3"
+                        placeholder="Start a post..."></textarea>
+                    <div class="d-flex justify-content-between">
+                        <input type="hidden" name="post_type" id="post_type">
+
+                        <!-- Image Button -->
+                        <label class="btn btn-light">
+                            <input type="file" name="image" class="d-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentcolor"
+                                class="bi bi-image" viewBox="0 0 16 16">
+                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                <path
+                                    d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
+                            </svg>
+                        </label>
+
+                        <!-- Video Button -->
+                        <label class="btn btn-light">
+                            <input type="file" name="video" class="d-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                class="bi bi-film" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 1a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm4 0v6h8V1zm8 8H4v6h8zM1 1v2h2V1zm2 3H1v2h2zM1 7v2h2V7zm2 3H1v2h2zm-2 3v2h2v-2zM15 1h-2v2h2zm-2 3v2h2V4zm2 3h-2v2h2zm-2 3v2h2v-2zm2 3h-2v2h2z" />
+                            </svg>
+                        </label>
+
+                        <!-- Post Button -->
+                        <button type="submit" class="btn btn" style="background-color: rgb(137, 168, 178);">
+                            Submit
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+
+            {% for post in posts %}
+            <div class="card p-3 mb-3" style="margin-top: 5px;">
+                <h6>
+                    <img src="{{ post.user.profile_pic.url }}" width="30px" height="30px"
+                        class="rounded-circle border border-primary" alt="">&nbsp;&nbsp; {{ post.user.username }}
+                </h6>
+                <hr>
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="img-fluid rounded mb-2"
+                    style="width: 100%; height: 100%; object-fit: cover;" alt="Post Image">
+                {% endif %}
+                {% if post.video %}
+                <video controls class="w-100">
+                    <source src="{{ post.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                {% endif %}
+                <hr>
+                <p>{{ post.content }}</p>
+                <p class="text-muted small">{{ post.created_at }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Right Sidebar -->
+
+        <div class="col-md-3" style="margin-top: 5px;">
+            <div class="card p-3">
+                <div class="text-center">
+                    <div class="profile-img mb-3 d-flex align-items-center justify-content-center">
+                        <div class="rounded-circle border border-dark overflow-hidden"
+                            style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;">
+
+                            {% if user.profile_pic %}
+                            <img src="{{ user.profile_pic.url }}" alt=""
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                            {% else %}
+                            <img src="{% static 'img/default.jpg' %}" alt="Profile Picture"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <h5 class="mb-1">{{ user.username }}</h5>
+                    <p class="text-muted small mb-2">Student at Coimbatore Institute of Engineering and Technology</p>
+                </div>
+                <div class="mb-3">
+                    <a href="/profile" class="btn btn-outline-secondary w-100">Build Your Profile</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script>
+
+</script>
+{% endblock %}

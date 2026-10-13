@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container my-4">
+    <!-- Title and Startup Count -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-auto text-center">
+            <button class="btn mt-2" style="background-color: rgb(137, 168, 178);"> 
+                Total Startups&nbsp;&nbsp;&nbsp;
+                <span class="badge bg-danger p-1">{{ startups.count }}</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Responsive Startup Grid -->
+    <div class="row">
+        {% for startup in startups %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <!-- Horizontal Startup Card -->
+            <div class="card shadow-sm p-3 d-flex align-items-center flex-row">
+                <!-- Startup Logo -->
+                {% if startup.logo %}
+                <div class="rounded-circle me-3 border border-dark d-flex justify-content-center align-items-center overflow-hidden"
+                    style="width: 80px; height: 80px; background-color: #f8f9fa;">
+                    <img src="{{ startup.logo.url }}" class="img-fluid rounded-top"
+                        alt="{{ startup.company_name }} Logo" />
+
+                </div>
+                {% else %}
+                <div class="rounded-circle me-3 border border-dark d-flex justify-content-center align-items-center overflow-hidden"
+                    style="width: 80px; height: 80px; background-color: #f8f9fa;">
+                    <img src="{% static 'img/default.jpg' %}" class="img-fluid rounded-top"
+                        alt="{{ startup.company_name }} Logo" />
+                </div>
+                {% endif %}
+
+                <!-- Startup Details -->
+                <div class="flex-grow-1">
+                    <h5 class="mb-1">{{ startup.company_name }}</h5>
+                    <p class="text-muted mb-1">Founder: {{ startup.founder_name }}</p>
+                    <p class="text-muted mb-1">{{ startup.email }}</p>
+                    <p class="text-muted mb-1">{{ startup.types_of_company }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center text-muted">No startups found.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

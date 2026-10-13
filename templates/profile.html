@@ -1,0 +1,629 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<style>
+    /* Profile Card Styles */
+    .profile-card {
+        background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .profile-card img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+    }
+
+    .profile-card h4 {
+        font-size: 22px;
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .profile-card p {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+
+    .profile-card .social-icons a {
+        margin: 0 10px;
+        color: #6f42c1;
+        font-size: 20px;
+        transition: color 0.3s;
+    }
+
+    .profile-card .social-icons a:hover {
+        color: #5c349f;
+    }
+
+    /* Tabs Navigation */
+    .nav-tabs {
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .nav-tabs .nav-link {
+        font-weight: bold;
+        color: #6c757d;
+    }
+
+    .nav-tabs .nav-link.active {
+        color: #ffffff;
+        background-color: rgb(137, 168, 178);
+        border: none;
+    }
+
+    /* Tab Content */
+    .tab-content {
+        margin-top: 20px;
+    }
+
+    .box {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .box h5 {
+        font-weight: bold;
+        color: rgb(137, 168, 178);
+    }
+
+    .list-group-item {
+        background: #f8f9fa;
+        border: none;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        background-color: rgb(179, 200, 207);
+        border: none;
+        border-radius: 6px;
+    }
+
+    .btn-primary:hover {
+        background-color: rgb(137, 168, 178);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .profile-card {
+            padding: 15px;
+        }
+
+        .nav-tabs {
+            flex-wrap: wrap;
+        }
+    }
+
+    .section {
+        background: #ffffff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h4 {
+        font-weight: bold;
+        color: rgb(137, 168, 178);
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    /* Timeline container */
+    .timeline {
+        position: relative;
+        padding: 20px 0;
+        list-style: none;
+    }
+
+    /* Vertical line */
+    .timeline::before {
+        content: "";
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #ccc;
+        /* Line color */
+    }
+
+    /* Timeline item */
+    .timeline-item {
+        position: relative;
+        margin-bottom: 30px;
+        padding-left: 40px;
+    }
+
+    /* Dot for each timeline point */
+    .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 14px;
+        top: 10px;
+        width: 12px;
+        height: 12px;
+        background-color: #4f4f4f;
+        /* Dot color */
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    /* Content styling */
+    .timeline-item strong {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .timeline-item small {
+        color: #555;
+        font-size: 14px;
+    }
+
+    .timeline-item a {
+        color: rgb(137, 168, 178);
+        text-decoration: none;
+    }
+
+    .timeline-item a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container my-5">
+    <!-- Profile Card -->
+    <div class="profile-card mx-auto">
+
+
+
+        {% if user.profile_pic %}
+        <img src="{{ user.profile_pic.url }}" class="border border-dark" alt="Profile Picture"
+            style="object-fit: cover;">
+        {% else %}
+        <img src="{% static 'img/default.jpg' %}" class="border border-dark" alt="Default Profile Picture"
+            style="object-fit: cover;">
+        {% endif %}
+
+
+        <h4>{{ user.username }}</h4>
+        <p>{{ user.email }}</p>
+        <div class="social-icons">
+            <a href="{{ user.linkedin }}" target="_blank">
+                <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="{{ user.github }}" target="_blank">
+                <i class="bi bi-github"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs justify-content-center mt-4" id="profileTabs" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                type="button" role="tab">Profile</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit" type="button"
+                role="tab">Edit</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="skills-tab" data-bs-toggle="tab" data-bs-target="#skills" type="button"
+                role="tab">Skills</button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="profileTabsContent">
+        <!-- Profile Tab -->
+        <div class="tab-pane fade show active" id="profile" role="tabpanel">
+            <div class="box bg-light p-3 rounded shadow-sm">
+                <h5 class="border-bottom pb-2 mb-3">About</h5>
+                <div class="row gy-3">
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Email :</strong> {{ user.email }}</p>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Department :</strong> {{ user.dep }}</p>
+                    </div>
+                    {% if user.people == 'faculty' %}
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Designation :</strong> {{ user.hostel }}</p>
+                    </div>
+                    {% else %}
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Roll No :</strong> {{ user.roll_no }}</p>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Year :</strong> {{ user.year }}</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Field :</strong> {{ user.filed }}</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Hostel :</strong> {{ user.hostel }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Tab -->
+        <div class="tab-pane fade" id="edit" role="tabpanel">
+            <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data" class="box">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="user_info">
+                <h5>Edit Profile</h5>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}">
+                </div>
+                <div class="mb-3">
+                    <label for="roll_no" class="form-label">Roll Number</label>
+                    <input type="text" class="form-control" id="roll_no" name="roll_no" value="{{ user.roll_no }}">
+                </div>
+                {% if user.people == 'faculty' %}
+                <div class="mb-3">
+                    <label for="reg_no" class="form-label">Registration Number</label>
+                    <input type="text" class="form-control" id="reg_no" name="reg_no" value="0">
+                </div>
+                {% else %}
+                <div class="mb-3">
+                    <label for="reg_no" class="form-label">Registration Number</label>
+                    <input type="text" class="form-control" id="reg_no" name="reg_no" value="{{ user.reg_no }}">
+                </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label for="username" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+                </div>
+                <div class="mb-3">
+                    <label for="roll_no" class="form-label">Phone Numer</label>
+                    <input type="tel" class="form-control" id="ph_no" name="ph_no" value="{{ user.ph_no }}">
+                </div>
+
+                {% if user.people == 'faculty' %}
+                <div class="mb-3">
+                    <label for="dep" class="form-label">Department</label>
+                    <select class="form-control" name="dep" id="dep">
+                        <option selected value="{{ user.dep }}">{{ user.dep }}</option>
+                        <option value="Artificial Intelligence & Data Science">Artificial
+                            Intelligence & Data Science</option>
+                        <option value="Computer Science Engineering">Computer Science Engineering
+                        </option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Electronics and Communication Engineering">Electronics and
+                            Communication Engineering</option>
+                        <option value="Electrical and Electronics Engineering">Electrical and
+                            Electronics Engineering</option>
+                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                        <option value="Civil Engineering">Civil Engineering</option>
+                        <option value="Mechatronics">Mechatronics</option>
+                        <option value="Tamil">Tamil</option>
+                        <option value="English">English</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Physical Education">Physical Education</option>
+                    </select>
+                </div>
+                {% else %}
+                <div class="mb-3">
+                    <label for="reg_no" class="form-label">Year</label>
+                    <select class="form-control" id="year" name="year">
+                        <option selected value="{{ user.year }}">{{ user.year }}</option>
+                        <option value="2024-28">2024-28</option>
+                        <option value="2023-27">2023-27</option>
+                        <option value="2022-26">2022-26</option>
+                        <option value="2021-25">2021-25</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="dep" class="form-label">Department</label>
+                    <select class="form-control" id="dep" name="dep">
+                        <option selected value="{{ user.dep }}">{{ user.dep }}</option>
+                        <option value="AI & DS">AI & DS</option>
+                        <option value="IT">IT</option>
+                        <option value="CSE">CSE</option>
+                        <option value="CSE(CS)">CSE(CS)</option>
+                        <option value="ECE">ECE</option>
+                        <option value="EEE">EEE</option>
+                        <option value="CIVIL">CIVIL</option>
+                        <option value="MECH">MECH</option>
+                        <option value="MCT">MCT</option>
+                    </select>
+                </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label for="roll_no" class="form-label">Fields</label>
+                    <select class="form-control" name="filed" id="filed">
+                        <option selected value="{{ user.filed }}">{{ user.filed }}</option>
+
+                        <!-- GRAPHICS & DESIGN -->
+                        <option disabled>GRAPHICS & DESIGN</option>
+                        <option value="Minimalist logo design">Minimalist logo design</option>
+                        <option value="Illustration">Illustration</option>
+                        <option value="Website Design">Website Design</option>
+                        <option value="Architecture & Interior Design">Architecture & Interior Design</option>
+                        <option value="AI Development">AI Development</option>
+                        <option value="Image Editing">Image Editing</option>
+                        <option value="Product & Gaming">Product & Gaming</option>
+                        <option value="Visual Design">Visual Design</option>
+                        <option value="Marketing Design">Marketing Design</option>
+                        <option value="3D Design">3D Design</option>
+                        <option value="Fashion & Merchandise">Fashion & Merchandise</option>
+                        <option value="AutoCad">AutoCad</option>
+                        <option value="Circuit Designing">Circuit Designing</option>
+                        <option value="Controlling coding">Controlling coding</option>
+                        <option value="Mother board Designing">Mother board Designing</option>
+                        <option value="3D Printing">3D Printing</option>
+                        <option value="Fashion Designing">Fashion Designing</option>
+
+                        <!-- WRITING & TRANSLATION -->
+                        <option disabled>WRITING & TRANSLATION</option>
+                        <option value="Content writing">Content writing</option>
+                        <option value="Editing & Critique">Editing & Critique</option>
+                        <option value="Book & E-Book Publishing">Book & E-Book Publishing</option>
+                        <option value="Translation and Transcription">Translation and Transcription</option>
+                        <option value="Business & Marketing Copy">Business & Marketing Copy</option>
+                        <option value="Career Writing">Career Writing</option>
+
+                        <!-- VIDEO & ANIMATION -->
+                        <option disabled>VIDEO & ANIMATION</option>
+                        <option value="Editing & Post production">Editing & Post production</option>
+                        <option value="Social & marketing Videos">Social & marketing Videos</option>
+                        <option value="Presenter Videos">Presenter Videos</option>
+                        <option value="Explainer Videos">Explainer Videos</option>
+                        <option value="Animation">Animation</option>
+                        <option value="Product Videos">Product Videos</option>
+                        <option value="Motion Graphics">Motion Graphics</option>
+                        <option value="Filmed video production">Filmed video production</option>
+
+                        <!-- AI SERVICES -->
+                        <option disabled>AI SERVICES</option>
+                        <option value="AI Development">AI Development</option>
+                        <option value="AI Application">AI Application</option>
+                        <option value="AI Chatbots">AI Chatbots</option>
+                        <option value="AI Design">AI Design</option>
+                        <option value="AI Artist">AI Artist</option>
+                        <option value="AI Video art">AI Video art</option>
+                        <option value="AI Spokesperson Videos">AI Spokesperson Videos</option>
+                        <option value="DataScience & ML">DataScience & ML</option>
+                        <option value="Data Analytics">Data Analytics</option>
+                        <option value="Data Visualization">Data Visualization</option>
+                        <option value="Data Annotations">Data Annotations</option>
+                        <option value="AI Consulting">AI Consulting</option>
+                        <option value="AI Content Editing">AI Content Editing</option>
+                        <option value="AI Voice Synthesis">AI Voice Synthesis</option>
+                        <option value="Customization AI Videos">Customization AI Videos</option>
+
+                        <!-- PHOTOGRAPHY -->
+                        <option disabled>PHOTOGRAPHY</option>
+                        <option value="ShortFilm">ShortFilm</option>
+                        <option value="Event Photography">Event Photography</option>
+                        <option value="Cinematography">Cinematography</option>
+                        <option value="Direction Of Photography">Direction Of Photography</option>
+                        <option value="Product & Lifestyle">Product & Lifestyle</option>
+                        <option value="People&Scenes">People&Scenes</option>
+                        <option value="Local Photography">Local Photography</option>
+
+                        <!-- SPORTS (M) -->
+                        <option disabled>SPORTS (M)</option>
+                        <option value="Cricket">Cricket</option>
+                        <option value="Football">Football</option>
+                        <option value="Handball">Handball</option>
+                        <option value="Basketball">Basketball</option>
+                        <option value="Volleyball">Volleyball</option>
+                        <option value="Kabbadi">Kabbadi</option>
+                        <option value="Badminton">Badminton</option>
+                        <option value="Athlethics">Athlethics</option>
+
+                        <!-- SPORTS (W) -->
+                        <option disabled>SPORTS (W)</option>
+                        <option value="Volleyball">Volleyball</option>
+                        <option value="Basketball">Basketball</option>
+                        <option value="Football">Football</option>
+                        <option value="Athlethics">Athlethics</option>
+
+                        <!-- PROGRAMMING & TECH -->
+                        <option disabled>PROGRAMMING & TECH</option>
+                        <option value="Websites">Websites</option>
+                        <option value="Application Development">Application Development</option>
+                        <option value="Mobile Apps">Mobile Apps</option>
+                        <option value="Website Platforms">Website Platforms</option>
+                        <option value="Support & Cybersecurity">Support & Cybersecurity</option>
+                        <option value="Automation & Testing">Automation & Testing</option>
+                        <option value="Desktop Applications">Desktop Applications</option>
+                        <option value="Front End Development">Front End Development</option>
+                        <option value="Back End Development">Back End Development</option>
+                        <option value="VR & AR Development">VR & AR Development</option>
+                        <option value="Game Development">Game Development</option>
+                        <option value="UI/UX Design">UI/UX Design</option>
+                        <option value="E-Commerce Development">E-Commerce Development</option>
+                        <option value="Internet Of Things">Internet Of Things</option>
+                        <option value="FullStack Development">FullStack Development</option>
+                    </select>
+
+                </div>
+
+                <!-- status -->
+                {% if user.people == 'faculty' %}
+                <div class="mb-3">
+                    <label for="hostel" class="form-label">Designation</label>
+                    <select class="form-select" name="hostel" id="">
+                        <option selected value="{{ user.hostel }}">{{ user.hostel }}</option>
+                        <option value="Head Of the Department">Head Of the Department</option>
+                        <option value="Professor">Professor</option>
+                        <option value="Assistant Professor">Assistant Professor</option>
+                        <option value="Lab Technician">Lab Technician</option>
+                    </select>
+                </div>
+                {% else %}
+                <div class="mb-3">
+                    <label for="hostel" class="form-label">Hostel</label>
+                    <select class="form-select" name="hostel" id="">
+                        <option selected value="{{ user.hostel }}">{{ user.hostel }}</option>
+                        <option value="Hostel">Hostel</option>
+                        <option value="Days scholar">Days scholar</option>
+                    </select>
+                </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label for="reg_no" class="form-label">Linkedin</label>
+                    <input type="text" class="form-control" id="linkedin" name="linkedin" value="{{ user.linkedin }}">
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">GitHub</label>
+                    <input type="text" class="form-control" id="github" name="github" value="{{ user.github }}">
+                </div>
+                <div class="mb-3">
+                    <label for="roll_no" class="form-label">Profile Picture</label>
+                    <input type="file" class="form-control" id="profile_pic" name="profile_pic"
+                        value="{{ user.profile_pic }}">
+                </div>
+                <button type="submit" class="btn w-100" style="background-color: rgb(137, 168, 178);">Update</button>
+            </form>
+        </div>
+
+        <!-- Skills Tab -->
+        <div class="tab-pane fade" id="skills" role="tabpanel">
+            <div class="box">
+                <h5>Skills</h5>
+                {% if skills %}
+                <ul class="list-group">
+                    {% for skill in skills %}
+                    <li class="list-group-item">{{ skill.skill_name }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No skills added yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- Certificates -->
+    <div class="section">
+        <h4>Certificates</h4>
+        {% if certificates %}
+        <ul class="list-group">
+            {% for cert in certificates %}
+            <li class="list-group-item bg-light">◦ &nbsp; {{ cert.about_certificate }} - <a
+                    href="{{ cert.googledrive_link }}" target="_blank">View</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No certificates added yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Timeline -->
+    <div class="section">
+        <h4>Timeline</h4>
+        {% if timeline_posts %}
+        <ul class="timeline">
+            {% for post in timeline_posts %}
+            <li class="timeline-item">
+                <strong>{{ post.content }}</strong>
+                <br>
+                <small>Created at: {{ post.created_at }}</small>
+                {% if post.media_link %}
+                <br><a href="{{ post.media_link }}" target="_blank">View Media</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No timeline posts yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs justify-content-center mt-4" id="profileTabs" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#add_skill"
+                type="button" role="tab">Add Skill</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#add_certificates" type="button"
+                role="tab">Certificates</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="skills-tab" data-bs-toggle="tab" data-bs-target="#add_timeline" type="button"
+                role="tab">Timeline</button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="profileTabsContent">
+        <!-- Skill Add Tab -->
+        <div class="tab-pane fade show active" id="add_skill" role="tabpanel">
+            <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data" class="box">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="skill">
+                <h5>Add Skill</h5>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="skill_name" name="skill_name">
+                </div>
+
+                <button type="submit" class="btn w-100" style="background-color: rgb(137, 168, 178);">Update</button>
+            </form>
+        </div>
+
+        <!-- Certificates -->
+        <div class="tab-pane fade" id="add_certificates" role="tabpanel">
+            <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data" class="box">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="certificate">
+                <h6>Google Drive Link</h6>
+                <div class="mb-3">
+                    <input type="url" class="form-control" id="googledrive_link" name="googledrive_link">
+                </div>
+                <h6>About Certificate</h6>
+                <div class="mb-3">
+                    <textarea name="about_certificate" class="form-control" id="about_certificate">
+
+                    </textarea>
+
+                </div>
+
+                <button type="submit" class="btn w-100" style="background-color: rgb(137, 168, 178);">Update</button>
+            </form>
+        </div>
+
+        <!-- Timeline Tab -->
+        <div class="tab-pane fade" id="add_timeline" role="tabpanel">
+            <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data" class="box">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="timeline">
+                <h6>Content</h6>
+                <div class="mb-3">
+                    <textarea class="form-control" name="content" id="content">
+
+                    </textarea>
+                </div>
+                <h6>Media Link (Optional)</h6>
+                <div class="mb-3">
+                    <input type="url" class="form-control" id="media_link" name="media_link">
+                </div>
+
+                <button type="submit" class="btn w-100" style="background-color: rgb(137, 168, 178);">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

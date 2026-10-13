@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Current Stories</h2>
+  {% if stories %}
+    {% for story in stories %}
+      <div>
+        <!-- Debug: Print the media URL -->
+        <p>Media URL: {{ story.media.url }}</p>
+        
+        {% if story.media.url|slice:"-4" == ".mp4" %}
+          <!-- Debug: Check rendering logic -->
+          <p>Video condition matched!</p>
+          <video controls width="300">
+            <source src="{{ story.media.url }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        {% else %}
+          <p>Image condition matched.</p>
+          <img src="{{ story.media.url }}" width="300">
+        {% endif %}
+        
+        <p>Posted by: {{ story.user.username }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No active stories at the moment.</p>
+  {% endif %}
+{% endblock %}

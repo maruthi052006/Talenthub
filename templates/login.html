@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/apexa png.png' %}">
+    <title>Ciet Talent Hub</title>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.1.0/mdb.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- AOS Library CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar fixed-top navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="{% static 'img/ciet logo.jpg' %}" width="70px" height="50px"
+                    alt=""></a>
+            <button class="navbar-toggler" type="button" id="sidebarToggle">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-list"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <a class="navbar-brand" href="#"><img src="{% static 'img/ciet.png' %}" width="60px" height="40px"
+                    alt=""></a>
+            <button id="sidebarClose" class="btn-close text-reset"></button>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="/index">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="/postd">Posts</a></li>
+            <li class="nav-item"><a class="nav-link" href="">Fields</a></li>
+            <li class="nav-item"><a class="nav-link" href="/clubs">Clubs</a></li>
+            <li class="nav-item"><a class="nav-link" href="/startup">Startup</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            <li class="nav-item">
+                <a href="/signup">
+                    <button type="button" class="btn btn-outline-primary w-100">
+                        Sign up
+                    </button>
+                </a>
+            </li>
+            <br>
+            <li class="nav-item">
+                <a href="/logout">
+                    <button type="button" class="btn btn-outline-danger w-100">
+                        Log out
+                    </button>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <!-- Hero Section -->
+    <section id="home" class="" style="height: 100vh; display: flex; align-items: center; justify-content: center; 
+       background: linear-gradient(rgba(0, 0, 0, 0.694), rgba(0, 0, 0, 0.5)), 
+       url('{% static "img/index.jpg" %}') no-repeat center center/cover;">
+        <div class="container justify-content-center align-items-center">
+            <div class="row justify-content-center align-items-center p-2">
+                <div class="col-lg-10" style="margin-left: 40%;"></div>
+                <!------------------------message(start)--------------------------->
+                {% block message_block %}
+                {% if messages %}
+                {% for message in messages %}
+                {% if message.tags == 'success' %}
+                <div class="alert alert-sucess alert-dismissible fade show text-center text-light" role="alert"
+                    style="background-color: green;">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong>{{message}}</strong>
+                </div>
+                {% endif %}
+                {% if message.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible fade show text-center text-light" role="alert"
+                    style="background-color: rgba(229, 21, 21, 0.723);">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong>{{message}}</strong>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endblock message_block %}
+                <!-- ----------------------message(end)-------------------------- -->
+
+                <div class="rounded-4 p-4 text-dark col-lg-5" style="background-color: rgba(255, 255, 255, 0.768);">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- Username -->
+                        <div class="col-md-12 mb-4">
+                            <label for="" style="font-size: large;">First Name <span class="text-danger"
+                                    style="font-size: x-large;">*</span></label>
+                            <input type="text" name="username" placeholder="Username"
+                                class="form-control form-control" />
+                        </div>
+
+                        <!-- Password -->
+                        <div class="col-md-12 mb-4">
+                            <label for="" style="font-size: large;">Password <span class="text-danger"
+                                    style="font-size: x-large;">*</span></label>
+                            <input type="password" name="password" placeholder="Password"
+                                class="form-control form-control" />
+                        </div>
+
+                        <!-- Submit button -->
+                        <input value="Save" type="submit" class="btn"
+                            style="background-color: rgb(137, 168, 178); margin-left: 40%;">
+                    </form>
+                    <br>
+                    <div class="text-center">
+                        <a href="{% url 'signup' %}" style="color:rgb(60, 61, 55);">
+                            Register now !
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>About Us</h5>
+                    <p>We are a team of creative designers and developers building modern websites with Bootstrap.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">About</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Services</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Portfolio</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Follow Us</h5>
+                    <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="text-center border-top pt-3 mt-4">
+                <p>&copy; 2024 Apexa. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll-to-Top Button -->
+    <button class="scroll-to-top" id="scrollToTopBtn">
+        ↑
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Library JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script src="{% static '/js/style.js' %}"></script>
+    <script>
+
+
+    </script>
+</body>
+
+</html>

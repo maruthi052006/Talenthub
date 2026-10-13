@@ -1,0 +1,488 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/apexa png.png' %}">
+    <title>Ciet Talent Hub</title>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.1.0/mdb.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- AOS Library CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar fixed-top navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="{% static 'img/ciet logo.jpg' %}" width="70px" height="50px"
+                    alt=""></a>
+            <button class="navbar-toggler" type="button" id="sidebarToggle">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-list"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <a class="navbar-brand" href="#"><img src="{% static 'img/ciet.png' %}" width="60px" height="40px"
+                    alt=""></a>
+            <button id="sidebarClose" class="btn-close text-reset"></button>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'post' %}">Posts</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'fields' %}">Fields</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'dep' %}">Department</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'club_list' %}">Clubs</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'startup_list' %}">Startup</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            <li class="nav-item">
+                <a href="/signup">
+                    <button type="button" class="btn btn-outline-primary w-100">
+                        Sign up
+                    </button>
+                </a>
+            </li>
+            <br>
+            <li class="nav-item">
+                <a href="/logout">
+                    <button type="button" class="btn btn-outline-danger w-100">
+                        Log out
+                    </button>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="slideshow"></div>
+        <div class="overlay"></div>
+        <div class="container text-center text-white hero-content">
+            <h2 data-aos="fade-up">Welcome to CIET Talent Hub</h2>
+            <h6 data-aos="fade-up" data-aos-delay="200">Connect, Collaborate, and Shine! Discover endless possibilities
+                at CIET Talent Hub.</h6>
+            <!-- <p data-aos="fade-up" data-aos-delay="300">Unleash your potential and be part of our vibrant talent
+                community.</p> -->
+
+            <!-- Call-to-Action Button -->
+            <div class="mt-5" data-aos="fade-up" data-aos-delay="200">
+                <a href="#about" class="btn btn-lg text-light" style="background-color: rgb(179, 200, 207);">Learn
+                    More</a>
+                <a href="/signup" class="btn btn-outline-success btn-lg">Join Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about-section py-5" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- About Us Text -->
+                <div class="col-md-6 text-center text-md-start mb-4 mb-md-0">
+                    <span class="badge bg-light text-danger px-3 py-2 mb-3" data-aos="fade-right">About Us</span>
+                    <h2 class="fw-bold mb-4" data-aos="fade-right" data-aos-duration="400">Empowering Talents at CIET
+                    </h2>
+                    <p class="text-muted mb-4" data-aos="fade-right" data-aos-duration="400">
+                        CIET Talent Hub is a community-driven platform designed to connect students, faculty, and
+                        industry professionals. Our mission is to foster skill development, collaboration, and
+                        opportunities through innovative platforms and initiatives.
+                    </p>
+                    <a href="#" class="btn text-light px-4 py-2 fast-button" data-aos="zoom-in" data-aos-duration="300"
+                        style="background-color: rgb(137, 168, 178);">Join the Hub →</a>
+                </div>
+                <!-- About Us Cards -->
+                <div class="col-md-6">
+                    <div class="row g-3">
+                        <!-- Card 1 -->
+                        <div class="col-sm-6" data-aos="fade-up" data-aos-duration="400">
+                            <div class="about-card p-4 text-center shadow-sm hover-effect">
+                                <div class="icon mb-3">
+                                    <i class="bi bi-person-bounding-box fs-3" style="color: rgb(137, 168, 178);"></i>
+                                </div>
+                                <h5 class="fw-bold">Student Skill Management</h5>
+                                <p class="text-muted">Track and display student skills seamlessly to connect talent with
+                                    opportunities effectively.</p>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="col-sm-6" data-aos="fade-up" data-aos-duration="400">
+                            <div class="about-card p-4 text-center shadow-sm hover-effect">
+                                <div class="icon mb-3">
+                                    <i class="bi bi-tools fs-3" style="color: rgb(137, 168, 178);"></i>
+                                </div>
+                                <h5 class="fw-bold">Industry Collaboration</h5>
+                                <p class="text-muted">Foster collaboration between students, alumni, and professionals
+                                    for mentorship and project opportunities.</p>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="col-sm-6" data-aos="fade-up" data-aos-duration="400">
+                            <div class="about-card p-4 text-center shadow-sm hover-effect">
+                                <div class="icon mb-3">
+                                    <i class="bi bi-award fs-3" style="color: rgb(137, 168, 178)"></i>
+                                </div>
+                                <h5 class="fw-bold">Recognition & Awards</h5>
+                                <p class="text-muted">Celebrate achievements by recognizing the efforts and talents of
+                                    students and collaborators.</p>
+                            </div>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="col-sm-6" data-aos="fade-up" data-aos-duration="400">
+                            <div class="about-card p-4 text-center shadow-sm hover-effect">
+                                <div class="icon mb-3">
+                                    <i class="bi bi-calendar fs-3" style="color: rgb(137, 168, 178)"></i>
+                                </div>
+                                <h5 class="fw-bold">Events & Workshops</h5>
+                                <p class="text-muted">Participate in skill-building events, webinars, and workshops
+                                    designed to empower talent.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <br>
+
+    <!-- Count Section -->
+    <div class="container-fluid py-5 count-section" id="count-section">
+        <div class="container text-center text-white">
+            <h3 class="fw-bold mb-4" data-aos="fade-down">CIET Talent Hub Statistics</h3>
+            <div class="row justify-content-center g-4">
+                <!-- Number of Users -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-box p-4 border rounded shadow bg-white text-center" data-aos="zoom-in"
+                        data-aos-delay="200">
+                        <h1 class="text-primary fw-bold" id="users-count">{{ user.count }}</h1>
+                        <p class="text-muted">Registered Users</p>
+                    </div>
+                </div>
+                <!-- Number of Entrepreneurs -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-box p-4 border rounded shadow bg-white text-center" data-aos="zoom-in"
+                        data-aos-delay="400">
+                        <h1 class="text-success fw-bold" id="entrepreneurs-count">{{ startups.count }}</h1>
+                        <p class="text-muted">Entrepreneurs</p>
+                    </div>
+                </div>
+                <!-- Number of Clubs -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-box p-4 border rounded shadow bg-white text-center" data-aos="zoom-in"
+                        data-aos-delay="600">
+                        <h1 class="text-danger fw-bold" id="clubs-count">{{ clubs.count }}</h1>
+                        <p class="text-muted">Active Clubs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <h1 class="text-primary fw-bold" id="users-count">{{ users_count }}</h1>
+<h1 class="text-success fw-bold" id="entrepreneurs-count">{{ entrepreneurs_count }}</h1>
+<h1 class="text-danger fw-bold" id="clubs-count">{{ clubs_count }}</h1> -->
+
+    <br><br>
+    <div class="gallery-header">
+        <p><span class="section-title">Service List</span></p>
+        <h5></h5>
+    </div>
+    <!-- Services list -->
+    <div class="carousel-container">
+
+        <!-- Left navigation button -->
+        <button class="nav-button nav-prev" style="background-color: rgb(137, 168, 178);">&lt;</button>
+
+        <!-- Continuous scrolling wrapper -->
+        <div class="services-container">
+            <!-- Dynamically generated cards -->
+            <div class="service-card bg-success">
+                <img src="/static/img/s1.jpeg" alt="Social Media Marketing">
+                <div class="card-title">
+                    <i class="fas fa-bullhorn"></i> Social Media Marketing
+                </div>
+            </div>
+            <div class="service-card bg-warning">
+                <img src="/static/img/s2.jpeg" alt="Voice Over">
+                <div class="card-title">
+                    <i class="fas fa-microphone"></i> Voice Over
+                </div>
+            </div>
+            <div class="service-card bg-danger">
+                <img src="/static/img/s3.jpeg" alt="UGC Videos">
+                <div class="card-title">
+                    <i class="fas fa-video"></i> UGC Videos
+                </div>
+            </div>
+            <div class="service-card bg-primary">
+                <img src="/static/img/s4.jpeg" alt="Software Development">
+                <div class="card-title">
+                    <i class="fas fa-code"></i> Software Development
+                </div>
+            </div>
+            <div class="service-card bg-info">
+                <img src="/static/img/s5.jpeg" alt="Graphic Design">
+                <div class="card-title">
+                    <i class="fas fa-paint-brush"></i> Graphic Design
+                </div>
+            </div>
+            <div class="service-card bg-dark">
+                <img src="/static/img/s6.jpeg" alt="Video Editing">
+                <div class="card-title">
+                    <i class="fas fa-film"></i> Video Editing
+                </div>
+            </div>
+            <div class="service-card bg-secondary">
+                <img src="/static/img/s7.jpeg" alt="Web Development">
+                <div class="card-title">
+                    <i class="fas fa-laptop-code"></i> Web Development
+                </div>
+            </div>
+            <div class="service-card bg-light">
+                <img src="/static/img/s8.jpeg" alt="UI/UX Design">
+                <div class="card-title">
+                    <i class="fas fa-pencil-ruler"></i> UI/UX Design
+                </div>
+            </div>
+            <div class="service-card bg-success">
+                <img src="/static/img/s9.jpeg" alt="SEO Services">
+                <div class="card-title">
+                    <i class="fas fa-search"></i> SEO Services
+                </div>
+            </div>
+            <div class="service-card bg-warning">
+                <img src="/static/img/s10.jpeg" alt="Content Writing">
+                <div class="card-title">
+                    <i class="fas fa-keyboard"></i> Content Writing
+                </div>
+            </div>
+        </div>
+
+        <!-- Right navigation button -->
+        <button class="nav-button nav-next" style="background-color: rgb(137, 168, 178);">&gt;</button>
+    </div>
+
+
+
+    <!-- Register -->
+    <div class="container-fluid join-section">
+        <!-- Background Video -->
+        <video autoplay muted loop playsinline class="bg-video">
+            <source src="/static/img/video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Overlay Content -->
+        <div class="content">
+            <!-- Left Side Content -->
+            <div class="left-content"></div>
+
+            <!-- Right Side Content -->
+            <div class="right-content text-white" data-aos="fade-left" data-aos-duration="2000">
+                <h6 class="text-uppercase fw-bold">Become Part of CIET Talent Hub</h6>
+                <h1 class="fw-bold text-shadow">Unlock Opportunities & Skills with Us</h1>
+                <p>Join our talent network to connect, learn, and grow with peers & mentors. Sign up today!</p>
+                <a href="signup.html">
+                    <button class="btn text-light mt-3" data-aos="zoom-in" data-aos-duration="2000" data-aos-delay="300"
+                        style="background-color: rgb(137, 168, 178);">Sign Up Now</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Our Team -->
+    <section class="team-section">
+        <div class="gallery-header">
+            <p><span class="section-title">Our Team</span></p>
+            <h5>Meet the dedicated team behind CIET Talent Hub, empowering skills and innovation</h5>
+        </div>
+        <div class="container">
+            <div class="row g-4">
+                <!-- Team Member 1 -->
+                <div class="col-md-3">
+                    <div class="card team-card" style="animation-delay: 0.2s;">
+                        <img src="static/img/team1.jpg" alt="Dhruv Patel" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="team-name" style="color: rgb(137, 168, 178);">Dhruv Patel</h5>
+                            <p class="team-role">Project Manager</p>
+                            <div class="social-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-instagram"></i>
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 2 -->
+                <div class="col-md-3">
+                    <div class="card team-card" style="animation-delay: 0.4s;">
+                        <img src="static/img/team2.jpg" alt="Ananya Roy" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="team-name" style="color: rgb(137, 168, 178);">Ananya Roy</h5>
+                            <p class="team-role">Lead Developer</p>
+                            <div class="social-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-instagram"></i>
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 3 -->
+                <div class="col-md-3">
+                    <div class="card team-card" style="animation-delay: 0.6s;">
+                        <img src="static/img/team3.jpg" alt="Rohan Verma" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="team-name" style="color: rgb(137, 168, 178);">Rohan Verma</h5>
+                            <p class="team-role">UI/UX Designer</p>
+                            <div class="social-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-instagram"></i>
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 4 -->
+                <div class="col-md-3">
+                    <div class="card team-card" style="animation-delay: 0.8s;">
+                        <img src="static/img/team4.jpg" alt="Meera Sharma" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="team-name" style="color: rgb(137, 168, 178);">Meera Sharma</h5>
+                            <p class="team-role">Content Strategist</p>
+                            <div class="social-icons">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-instagram"></i>
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Contact -->
+    <div class="container-fluid contact-section py-5" id="contact">
+        <div class="container text-center text-dark mb-5">
+            <h2 class="fw-bold" style="color: rgb(137, 168, 178);">Contact Us</h2>
+            <p style="color: rgb(137, 168, 178);">Reach out to us for queries, collaborations, or information about the
+                CIET Talent Hub.</p>
+        </div>
+
+        <div class="container">
+            <div class="row g-4">
+                <!-- Office Location -->
+                <div class="col-md-3">
+                    <div class="contact-card p-4 text-center" data-aos="fade-up" data-aos-delay="100">
+                        <i class="bi bi-geo-alt-fill fs-2" style="color: rgb(137, 168, 178);"></i>
+                        <h5 class="fw-bold mt-3 text-dark">Our Office</h5>
+                        <p>CIET Talent Hub<br>Avinashi Road<br>Coimbatore, TN 641014</p>
+                    </div>
+                </div>
+                <!-- Call Us -->
+                <div class="col-md-3">
+                    <div class="contact-card p-4 text-center" data-aos="fade-up" data-aos-delay="100">
+                        <i class="bi bi-telephone-fill fs-2" style="color: rgb(137, 168, 178);"></i>
+                        <h5 class="fw-bold mt-3 text-dark">Call Us</h5>
+                        <p>+91 98765 43210<br>+91 87654 32109</p>
+                    </div>
+                </div>
+                <!-- Email Us -->
+                <div class="col-md-3">
+                    <div class="contact-card p-4 text-center" data-aos="fade-up" data-aos-delay="200">
+                        <i class="bi bi-envelope-fill fs-2" style="color: rgb(137, 168, 178);"></i>
+                        <h5 class="fw-bold mt-3 text-dark">Email Us</h5>
+                        <p>contact@ciettalenthub.com<br>support@ciettalenthub.com</p>
+                    </div>
+                </div>
+                <!-- Office Hours -->
+                <div class="col-md-3">
+                    <div class="contact-card p-4 text-center" data-aos="fade-up" data-aos-delay="200">
+                        <i class="bi bi-clock-fill fs-2" style="color: rgb(137, 168, 178);"></i>
+                        <h5 class="fw-bold mt-3">Office Hours</h5>
+                        <p>Monday - Friday<br>10:00 AM - 5:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>About Us</h5>
+                    <p>We are a team of creative designers and developers building modern websites with Bootstrap.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">About</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Services</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Portfolio</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Follow Us</h5>
+                    <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="text-center border-top pt-3 mt-4">
+                <p>&copy; 2024 Apexa. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll-to-Top Button -->
+    <button class="scroll-to-top" id="scrollToTopBtn">
+        ↑
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Library JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script src="{% static '/js/style.js' %}"></script>
+    <script>
+
+
+    </script>
+</body>
+
+</html>

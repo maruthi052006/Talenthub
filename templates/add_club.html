@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Club</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: url('https://via.placeholder.com/1920x1080') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            border: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container text-dark">
+        <h2>Add Club</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Club Name:</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Enter club name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="logo" class="form-label">Club Logo:</label>
+                <input type="file" name="logo" id="logo" class="form-control">
+                <small class="text-muted">Upload a logo in PNG or JPG format.</small>
+            </div>
+
+            <div class="mb-3">
+                <label for="head" class="form-label">Head of the Club:</label>
+                <input type="text" name="head" id="head" class="form-control" placeholder="Enter head's name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Enter club email" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Add Club</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

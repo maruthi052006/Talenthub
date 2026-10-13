@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<style>
+    /* Profile Card Styles */
+    .profile-card {
+        background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .profile-card img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+    }
+
+    .profile-card h4 {
+        font-size: 22px;
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .profile-card p {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+
+    .profile-card .social-icons a {
+        margin: 0 10px;
+        color: #6f42c1;
+        font-size: 20px;
+        transition: color 0.3s;
+    }
+
+    .profile-card .social-icons a:hover {
+        color: #5c349f;
+    }
+
+    /* Tabs Navigation */
+    .nav-tabs {
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .nav-tabs .nav-link {
+        font-weight: bold;
+        color: #6c757d;
+    }
+
+    .nav-tabs .nav-link.active {
+        color: #ffffff;
+        background-color: #6f42c1;
+        border: none;
+    }
+
+    /* Tab Content */
+    .tab-content {
+        margin-top: 20px;
+    }
+
+    .box {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .box h5 {
+        font-weight: bold;
+        color: #6f42c1;
+    }
+
+    .list-group-item {
+        background: #f8f9fa;
+        border: none;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        background-color: #6f42c1;
+        border: none;
+        border-radius: 6px;
+    }
+
+    .btn-primary:hover {
+        background-color: #5c349f;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .profile-card {
+            padding: 15px;
+        }
+
+        .nav-tabs {
+            flex-wrap: wrap;
+        }
+    }
+
+    .section {
+        background: #ffffff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h4 {
+        font-weight: bold;
+        color: #6f42c1;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    /* Timeline container */
+    .timeline {
+        position: relative;
+        padding: 20px 0;
+        list-style: none;
+    }
+
+    /* Vertical line */
+    .timeline::before {
+        content: "";
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #ccc;
+        /* Line color */
+    }
+
+    /* Timeline item */
+    .timeline-item {
+        position: relative;
+        margin-bottom: 30px;
+        padding-left: 40px;
+    }
+
+    /* Dot for each timeline point */
+    .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 14px;
+        top: 10px;
+        width: 12px;
+        height: 12px;
+        background-color: #4f4f4f;
+        /* Dot color */
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    /* Content styling */
+    .timeline-item strong {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .timeline-item small {
+        color: #555;
+        font-size: 14px;
+    }
+
+    .timeline-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .timeline-item a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container my-5">
+    <!-- Profile Card -->
+    <div class="profile-card mx-auto">
+        {% if startup.logo %}
+        <img src="{{ startup.logo.url }}" class="rounded-circle me-3 border border-dark" alt="Profile Picture"
+            style="object-fit: cover;">
+        {% else %}
+        <img src="{% static 'img/default.jpg' %}" class="rounded-circle me-3 border border-dark"
+            style="width: 80px; height: 80px; object-fit: cover;" alt="Default Profile Picture"
+            style="object-fit: cover;">
+        {% endif %}
+        <h4>{{ startup.company_name }}</h4>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs justify-content-center mt-4" id="profileTabs" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#about" type="button"
+                role="tab">About</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#type" type="button"
+                role="tab">Type</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="skills-tab" data-bs-toggle="tab" data-bs-target="#role" type="button"
+                role="tab">Role</button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="profileTabsContent">
+        <!-- Profile Tab -->
+        <div class="tab-pane fade show active" id="about" role="tabpanel">
+            <div class="box bg-light p-3 rounded shadow-sm">
+                <h5 class="text-primary border-bottom pb-2 mb-3">About</h5>
+                <div class="row gy-3">
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Email :</strong> {{ startup.email }}</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Phone no :</strong> {{ startup.phone }}</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Founder name :</strong> {{ startup.founder_name }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Type of Tab -->
+        <div class="tab-pane fade" id="type" role="tabpanel">
+            <div class="box bg-light p-3 rounded shadow-sm">
+                <h5 class="text-primary border-bottom pb-2 mb-3">Type</h5>
+                <div class="row gy-3">
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>◦</strong> {{ startup.types_of_company }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- projects of company -->
+        <div class="tab-pane fade" id="role" role="tabpanel">
+            <!-- <div class="box">
+                <h5>Skills</h5>
+                {% if skills %}
+                <ul class="list-group">
+                    {% for skill in skills %}
+                    <li class="list-group-item">{{ skill.skill_name }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No skills added yet.</p>
+                {% endif %}
+            </div> -->
+
+            <div class="box bg-light p-3 rounded shadow-sm">
+                <h5 class="text-primary border-bottom pb-2 mb-3">Role</h5>
+                <div class="row gy-3">
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>◦</strong> {{ startup.role_of_company }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,300 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<style>
+    /* Profile Card Styles */
+    .profile-card {
+        background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .profile-card img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+    }
+
+    .profile-card h4 {
+        font-size: 22px;
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .profile-card p {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+
+    .profile-card .social-icons a {
+        margin: 0 10px;
+        color:rgb(137, 168, 178);
+        font-size: 20px;
+        transition: color 0.3s;
+    }
+
+    .profile-card .social-icons a:hover {
+        color:rgb(137, 168, 178);
+    }
+
+    /* Tabs Navigation */
+    .nav-tabs {
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .nav-tabs .nav-link {
+        font-weight: bold;
+        color: #6c757d;
+    }
+
+    .nav-tabs .nav-link.active {
+        color: #ffffff;
+        background-color:rgb(137, 168, 178);
+        border: none;
+    }
+
+    /* Tab Content */
+    .tab-content {
+        margin-top: 20px;
+    }
+
+    .box {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .box h5 {
+        font-weight: bold;
+        color:rgb(137, 168, 178);
+    }
+
+    .list-group-item {
+        background: #f8f9fa;
+        border: none;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        background-color:rgb(137, 168, 178);
+        border: none;
+        border-radius: 6px;
+    }
+
+    .btn-primary:hover {
+        background-color:rgb(137, 168, 178);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .profile-card {
+            padding: 15px;
+        }
+
+        .nav-tabs {
+            flex-wrap: wrap;
+        }
+    }
+
+    .section {
+        background: #ffffff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h4 {
+        font-weight: bold;
+        color:rgb(137, 168, 178);
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    /* Timeline container */
+    .timeline {
+        position: relative;
+        padding: 20px 0;
+        list-style: none;
+    }
+
+    /* Vertical line */
+    .timeline::before {
+        content: "";
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #ccc;
+        /* Line color */
+    }
+
+    /* Timeline item */
+    .timeline-item {
+        position: relative;
+        margin-bottom: 30px;
+        padding-left: 40px;
+    }
+
+    /* Dot for each timeline point */
+    .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 14px;
+        top: 10px;
+        width: 12px;
+        height: 12px;
+        background-color: #4f4f4f;
+        /* Dot color */
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    /* Content styling */
+    .timeline-item strong {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .timeline-item small {
+        color: #555;
+        font-size: 14px;
+    }
+
+    .timeline-item a {
+        color:rgb(137, 168, 178);
+        text-decoration: none;
+    }
+
+    .timeline-item a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container my-5">
+    <!-- Profile Card -->
+    <div class="profile-card mx-auto">
+        {% if user.profile_pic %}
+        <img src="{{ user.profile_pic.url }}" class="rounded-circle me-3 border border-dark"
+         alt="Profile Picture" style="object-fit: cover;">
+        {% else %}
+        <img src="{% static 'img/default.jpg' %}" class="rounded-circle me-3 border border-dark"
+            style="width: 80px; height: 80px; object-fit: cover;" alt="Default Profile Picture"
+            style="object-fit: cover;">
+        {% endif %}
+        <h4>{{ user.username }}</h4>
+        <p>{{ user.email }}</p>
+        <div class="social-icons">
+            <a href="{{ user.linkedin }}" target="_blank">
+                <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="{{ user.github }}" target="_blank">
+                <i class="bi bi-github"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs justify-content-center mt-4" id="profileTabs" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                type="button" role="tab">Profile</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="skills-tab" data-bs-toggle="tab" data-bs-target="#skills" type="button"
+                role="tab">Skills</button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="profileTabsContent">
+        <!-- Profile Tab -->
+        <div class="tab-pane fade show active" id="profile" role="tabpanel">
+            <div class="box bg-light p-3 rounded shadow-sm">
+                <h5>About</h5>
+                <hr>
+                <div class="row gy-3">
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Email :</strong> {{ user.email }}</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Field :</strong> {{ user.filed }}</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Department :</strong> {{ user.dep }}</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Year :</strong> {{ user.year }}</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Roll No :</strong> {{ user.roll_no }}</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="mb-0"><strong>Hostel :</strong> {{ user.hostel }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Tab -->
+        <div class="tab-pane fade" id="skills" role="tabpanel">
+            <div class="box">
+                <h5>Skills</h5>
+                {% if skills %}
+                <ul class="list-group">
+                    {% for skill in skills %}
+                    <li class="list-group-item">{{ skill.skill_name }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No skills added yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- Certificates -->
+    <div class="section">
+        <h4>Certificates</h4>
+        {% if certificates %}
+        <ul class="list-group">
+            {% for cert in certificates %}
+            <li class="list-group-item bg-light">◦ &nbsp; {{ cert.about_certificate }} - <a
+                    href="{{ cert.googledrive_link }}" target="_blank">View</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No certificates added yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Timeline -->
+    <div class="section">
+        <h4>Timeline</h4>
+        {% if timeline_posts %}
+        <ul class="timeline">
+            {% for post in timeline_posts %}
+            <li class="timeline-item">
+                <strong>{{ post.content }}</strong>
+                <br>
+                <small>Created at: {{ post.created_at }}</small>
+                {% if post.media_link %}
+                <br><a href="{{ post.media_link }}" target="_blank">View Media</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No timeline posts yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,719 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<div class="container text-center" style="margin-top: 25px;">
+    <form method="post" action="{% url 'profile_list' %}" id="autoSubmitForm">
+        {% csrf_token %}
+        <!-- Graphics & Design Section -->
+        <div class="gallery-header">
+            <p><strong>Graphics & Design</strong></p>
+            <div class="row g-3">
+                <!-- Minimalist Logo Design -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Minimalist logo design" name="field"
+                        aria-label="Minimalist logo design">
+                        <i class="fa fa-paint-brush"></i>&nbsp;&nbsp; Minimalist logo design
+                    </button>
+                </div>
+
+                <!-- Illustration -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Illustration" name="field"
+                        aria-label="Illustration">
+                        <i class="fa fa-pencil-alt"></i>&nbsp;&nbsp; Illustration
+                    </button>
+                </div>
+
+                <!-- Website Design -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Website Design" name="field"
+                        aria-label="Website Design">
+                        <i class="fa fa-laptop-code"></i>&nbsp;&nbsp; Website Design
+                    </button>
+                </div>
+
+                <!-- Architecture & Interior Design -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Architecture & Interior Design"
+                        name="field" aria-label="Architecture & Interior Design">
+                        <i class="fa fa-building"></i>&nbsp; Architecture & Interior Design
+                    </button>
+                </div>
+
+                <!-- AI Development -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="AI Development" name="field"
+                        aria-label="AI Development">
+                        <i class="fa fa-robot"></i>&nbsp;&nbsp; AI Development
+                    </button>
+                </div>
+
+                <!-- Image Editing -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Image Editing" name="field"
+                        aria-label="Image Editing">
+                        <i class="fa fa-image"></i>&nbsp;&nbsp; Image Editing
+                    </button>
+                </div>
+
+                <!-- Product & Gaming -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Product & Gaming" name="field"
+                        aria-label="Product & Gaming">
+                        <i class="fa fa-gamepad"></i>&nbsp;&nbsp; Product & Gaming
+                    </button>
+                </div>
+
+                <!-- Visual Design -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Visual Design" name="field"
+                        aria-label="Visual Design">
+                        <i class="fa fa-paint-brush"></i>&nbsp;&nbsp; Visual Design
+                    </button>
+                </div>
+
+                <!-- Marketing Design -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Marketing Design" name="field"
+                        aria-label="Marketing Design">
+                        <i class="fa fa-bullhorn"></i>&nbsp;&nbsp; Marketing Design
+                    </button>
+                </div>
+
+                <!-- 3D Design -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="3D Design" name="field"
+                        aria-label="3D Design">
+                        <i class="fa fa-cube"></i>&nbsp;&nbsp; 3D Design
+                    </button>
+                </div>
+
+                <!-- Fashion & Merchandise -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Fashion & Merchandise" name="field"
+                        aria-label="Fashion & Merchandise">
+                        <i class="fa fa-tshirt"></i>&nbsp;&nbsp; Fashion & Merchandise
+                    </button>
+                </div>
+
+                <!-- AutoCad -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="AutoCad" name="field"
+                        aria-label="AutoCad">
+                        <i class="fa fa-drafting-compass"></i>&nbsp;&nbsp; AutoCad
+                    </button>
+                </div>
+
+                <!-- Circuit Designing -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Circuit Designing" name="field"
+                        aria-label="Circuit Designing">
+                        <i class="fa fa-microchip"></i>&nbsp;&nbsp; Circuit Designing
+                    </button>
+                </div>
+
+                <!-- Controlling Coding -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Controlling coding" name="field"
+                        aria-label="Controlling coding">
+                        <i class="fa fa-code"></i>&nbsp;&nbsp; Controlling coding
+                    </button>
+                </div>
+
+                <!-- Motherboard Designing -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Mother board Designing" name="field"
+                        aria-label="Mother board Designing">
+                        <i class="fa fa-microchip"></i>&nbsp;&nbsp; Mother board Designing
+                    </button>
+                </div>
+
+                <!-- 3D Printing -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="3D Printing" name="field"
+                        aria-label="3D Printing">
+                        <i class="fa fa-print"></i>&nbsp;&nbsp; 3D Printing
+                    </button>
+                </div>
+
+                <!-- Fashion Designing -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Fashion Designing" name="field"
+                        aria-label="Fashion Designing">
+                        <i class="fa fa-tshirt"></i>&nbsp;&nbsp; Fashion Designing
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <hr>
+
+        <!-- Programming & Tech Section -->
+        <div class="gallery-header">
+            <p><strong>Programming & Tech</strong></p>
+            <div class="row g-3">
+
+                <!-- Websites -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Websites" name="field"
+                        aria-label="Websites">
+                        <i class="fa fa-globe"></i>&nbsp;&nbsp; Websites
+                    </button>
+                </div>
+
+                <!-- Application Development -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Application Development" name="field"
+                        aria-label="Application Development">
+                        <i class="fa fa-cogs"></i>&nbsp;&nbsp; Application Development
+                    </button>
+                </div>
+
+                <!-- Mobile Apps -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Mobile Apps" name="field"
+                        aria-label="Mobile Apps">
+                        <i class="fa fa-mobile-alt"></i>&nbsp;&nbsp; Mobile Apps
+                    </button>
+                </div>
+
+                <!-- Website Platforms -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Website Platforms" name="field"
+                        aria-label="Website Platforms">
+                        <i class="fa fa-desktop"></i>&nbsp;&nbsp; Website Platforms
+                    </button>
+                </div>
+
+                <!-- Support & Cybersecurity -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Support & Cybersecurity" name="field"
+                        aria-label="Support & Cybersecurity">
+                        <i class="fa fa-shield-alt"></i>&nbsp;&nbsp; Support & Cybersecurity
+                    </button>
+                </div>
+
+                <!-- Automation & Testing -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Automation & Testing" name="field"
+                        aria-label="Automation & Testing">
+                        <i class="fa fa-tools"></i>&nbsp;&nbsp; Automation & Testing
+                    </button>
+                </div>
+
+                <!-- Desktop Applications -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Desktop Applications" name="field"
+                        aria-label="Desktop Applications">
+                        <i class="fa fa-laptop"></i>&nbsp;&nbsp; Desktop Applications
+                    </button>
+                </div>
+
+                <!-- Front End Development -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Front End Development" name="field"
+                        aria-label="Front End Development">
+                        <i class="fa fa-code"></i>&nbsp;&nbsp; Front End Development
+                    </button>
+                </div>
+
+                <!-- Back End Development -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Back End Development" name="field"
+                        aria-label="Back End Development">
+                        <i class="fa fa-database"></i>&nbsp;&nbsp; Back End Development
+                    </button>
+                </div>
+
+                <!-- VR & AR Development -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="VR & AR Development" name="field"
+                        aria-label="VR & AR Development">
+                        <i class="fa fa-vr-cardboard"></i>&nbsp;&nbsp; VR & AR Development
+                    </button>
+                </div>
+
+                <!-- Game Development -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Game Development" name="field"
+                        aria-label="Game Development">
+                        <i class="fa fa-gamepad"></i>&nbsp;&nbsp; Game Development
+                    </button>
+                </div>
+
+                <!-- UI/UX Design -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="UI/UX Design" name="field"
+                        aria-label="UI/UX Design">
+                        <i class="fa fa-pencil-ruler"></i>&nbsp;&nbsp; UI/UX Design
+                    </button>
+                </div>
+
+                <!-- E-Commerce Development -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="E-Commerce Development" name="field"
+                        aria-label="E-Commerce Development">
+                        <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp; E-Commerce Development
+                    </button>
+                </div>
+
+                <!-- Internet Of Things -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Internet Of Things" name="field"
+                        aria-label="Internet Of Things">
+                        <i class="fa fa-network-wired"></i>&nbsp;&nbsp; Internet Of Things
+                    </button>
+                </div>
+
+                <!-- FullStack Development -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="FullStack Development" name="field"
+                        aria-label="FullStack Development">
+                        <i class="fa fa-layer-group"></i>&nbsp;&nbsp; FullStack Development
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Writing & Translation Section -->
+        <div class="gallery-header">
+            <p><strong>Writing & Translation</strong></p>
+            <div class="row g-3">
+
+                <!-- Content Writing -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Content writing" name="field"
+                        aria-label="Content writing">
+                        <i class="fa fa-pencil-alt"></i>&nbsp;&nbsp; Content writing
+                    </button>
+                </div>
+
+                <!-- Editing & Critique -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Editing & Critique" name="field"
+                        aria-label="Editing & Critique">
+                        <i class="fa fa-edit"></i>&nbsp;&nbsp; Editing & Critique
+                    </button>
+                </div>
+
+                <!-- Book & E-Book Publishing -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Book & E-Book Publishing" name="field"
+                        aria-label="Book & E-Book Publishing">
+                        <i class="fa fa-book"></i>&nbsp;&nbsp; Book & E-Book Publishing
+                    </button>
+                </div>
+
+                <!-- Translation and Transcription -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Translation and Transcription"
+                        name="field" aria-label="Translation and Transcription">
+                        <i class="fa fa-language"></i>&nbsp; Translation and Transcription
+                    </button>
+                </div>
+
+                <!-- Business & Marketing Copy -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Business & Marketing Copy" name="field"
+                        aria-label="Business & Marketing Copy">
+                        <i class="fa fa-bullhorn"></i>&nbsp; Business & Marketing Copy
+                    </button>
+                </div>
+
+                <!-- Career Writing -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Career Writing" name="field"
+                        aria-label="Career Writing">
+                        <i class="fa fa-user-edit"></i>&nbsp;&nbsp; Career Writing
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+
+<hr>
+        <!-- AI Services Section -->
+        <div class="gallery-header">
+            <p><strong>AI Services</strong></p>
+            <div class="row g-3">
+
+                <!-- AI Development -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="AI Development" name="field"
+                        aria-label="AI Development">
+                        <i class="fa fa-robot"></i>&nbsp;&nbsp; AI Development
+                    </button>
+                </div>
+
+                <!-- AI Application -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="AI Application" name="field"
+                        aria-label="AI Application">
+                        <i class="fa fa-mobile-alt"></i>&nbsp;&nbsp; AI Application
+                    </button>
+                </div>
+
+                <!-- AI Chatbots -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="AI Chatbots" name="field"
+                        aria-label="AI Chatbots">
+                        <i class="fa fa-comments"></i>&nbsp;&nbsp; AI Chatbots
+                    </button>
+                </div>
+
+                <!-- AI Design -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="AI Design" name="field"
+                        aria-label="AI Design">
+                        <i class="fa fa-paint-brush"></i>&nbsp;&nbsp; AI Design
+                    </button>
+                </div>
+
+                <!-- AI Artist -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="AI Artist" name="field"
+                        aria-label="AI Artist">
+                        <i class="fa fa-palette"></i>&nbsp;&nbsp; AI Artist
+                    </button>
+                </div>
+
+                <!-- AI Video art -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="AI Video art" name="field"
+                        aria-label="AI Video art">
+                        <i class="fa fa-video"></i>&nbsp;&nbsp; AI Video art
+                    </button>
+                </div>
+
+                <!-- AI Spokesperson Videos -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="AI Spokesperson Videos" name="field"
+                        aria-label="AI Spokesperson Videos">
+                        <i class="fa fa-headset"></i>&nbsp;&nbsp; AI Spokesperson Videos
+                    </button>
+                </div>
+
+                <!-- DataScience & ML -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="DataScience & ML" name="field"
+                        aria-label="DataScience & ML">
+                        <i class="fa fa-flask"></i>&nbsp;&nbsp; DataScience & ML
+                    </button>
+                </div>
+
+                <!-- Data Analytics -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Data Analytics" name="field"
+                        aria-label="Data Analytics">
+                        <i class="fa fa-chart-line"></i>&nbsp;&nbsp; Data Analytics
+                    </button>
+                </div>
+
+                <!-- Data Visualization -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Data Visualization" name="field"
+                        aria-label="Data Visualization">
+                        <i class="fa fa-chart-pie"></i>&nbsp;&nbsp; Data Visualization
+                    </button>
+                </div>
+
+                <!-- Data Annotations -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Data Annotations" name="field"
+                        aria-label="Data Annotations">
+                        <i class="fa fa-pen-square"></i>&nbsp;&nbsp; Data Annotations
+                    </button>
+                </div>
+
+                <!-- AI Consulting -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="AI Consulting" name="field"
+                        aria-label="AI Consulting">
+                        <i class="fa fa-comments-dollar"></i>&nbsp;&nbsp; AI Consulting
+                    </button>
+                </div>
+
+                <!-- AI Content Editing -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="AI Content Editing" name="field"
+                        aria-label="AI Content Editing">
+                        <i class="fa fa-edit"></i>&nbsp;&nbsp; AI Content Editing
+                    </button>
+                </div>
+
+                <!-- AI Voice Synthesis -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="AI Voice Synthesis" name="field"
+                        aria-label="AI Voice Synthesis">
+                        <i class="fa fa-volume-up"></i>&nbsp;&nbsp; AI Voice Synthesis
+                    </button>
+                </div>
+
+                <!-- Custom AI Videos -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Custom AI Videos" name="field"
+                        aria-label="Custom AI Videos">
+                        <i class="fa fa-video"></i>&nbsp;&nbsp; Custom AI Videos
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="gallery-header">
+            <p><strong>Photography</strong></p>
+            <div class="row g-3">
+
+                <!-- Short Film -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="ShortFilm" name="field"
+                        aria-label="Short Film">
+                        <i class="fa fa-film"></i>&nbsp;&nbsp; Short Film
+                    </button>
+                </div>
+
+                <!-- Event Photography -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Event Photography" name="field"
+                        aria-label="Event Photography">
+                        <i class="fa fa-camera"></i>&nbsp;&nbsp; Event Photography
+                    </button>
+                </div>
+
+                <!-- Cinematography -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Cinematography" name="field"
+                        aria-label="Cinematography">
+                        <i class="fa fa-video"></i>&nbsp;&nbsp; Cinematography
+                    </button>
+                </div>
+
+                <!-- Direction of Photography -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Direction Of Photography" name="field"
+                        aria-label="Direction Of Photography">
+                        <i class="fa fa-clapperboard"></i>&nbsp;&nbsp; Direction Of Photography
+                    </button>
+                </div>
+
+                <!-- Product & Lifestyle -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Product & Lifestyle" name="field"
+                        aria-label="Product & Lifestyle">
+                        <i class="fa fa-camera-retro"></i>&nbsp;&nbsp; Product & Lifestyle
+                    </button>
+                </div>
+
+                <!-- People & Scenes -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="People&Scenes" name="field"
+                        aria-label="People & Scenes">
+                        <i class="fa fa-users"></i>&nbsp;&nbsp; People & Scenes
+                    </button>
+                </div>
+
+                <!-- Local Photography -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Local Photography" name="field"
+                        aria-label="Local Photography">
+                        <i class="fa fa-map-marker-alt"></i>&nbsp;&nbsp; Local Photography
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <hr>
+
+        <div class="gallery-header">
+            <p><strong>Sports (M)</strong></p>
+            <div class="row g-3">
+
+                <!-- Cricket -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Cricket" name="field"
+                        aria-label="Cricket">
+                        <i class="fa fa-baseball-ball"></i>&nbsp;&nbsp; Cricket
+                    </button>
+                </div>
+
+                <!-- Football -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Football" name="field"
+                        aria-label="Football">
+                        <i class="fa fa-futbol"></i>&nbsp;&nbsp; Football
+                    </button>
+                </div>
+
+                <!-- Handball -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Handball" name="field"
+                        aria-label="Handball">
+                        <i class="fa fa-hand-paper"></i>&nbsp;&nbsp; Handball
+                    </button>
+                </div>
+
+                <!-- Basketball -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Basketball" name="field"
+                        aria-label="Basketball">
+                        <i class="fa fa-basketball-ball"></i>&nbsp;&nbsp; Basketball
+                    </button>
+                </div>
+
+                <!-- Volleyball -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Volleyball" name="field"
+                        aria-label="Volleyball">
+                        <i class="fa fa-volleyball-ball"></i>&nbsp;&nbsp; Volleyball
+                    </button>
+                </div>
+
+                <!-- Kabbadi -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Kabbadi" name="field"
+                        aria-label="Kabbadi">
+                        <i class="fa fa-bowling-ball"></i>&nbsp;&nbsp; Kabbadi
+                    </button>
+                </div>
+
+                <!-- Badminton -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Badminton" name="field"
+                        aria-label="Badminton">
+                        <i class="fa fa-badminton"></i>&nbsp;&nbsp; Badminton
+                    </button>
+                </div>
+
+                <!-- Athletics -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Athletics" name="field"
+                        aria-label="Athletics">
+                        <i class="fa fa-running"></i>&nbsp;&nbsp; Athletics
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <hr>
+
+        <!-- Sports (W) Section -->
+        <div class="gallery-header">
+            <p><strong>Sports (W)</strong></p>
+            <div class="row g-3">
+
+                <!-- Volleyball -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Volleyball" name="field"
+                        aria-label="Volleyball">
+                        <i class="fa fa-volleyball-ball"></i>&nbsp;&nbsp; Volleyball
+                    </button>
+                </div>
+
+                <!-- Basketball -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Basketball" name="field"
+                        aria-label="Basketball">
+                        <i class="fa fa-basketball-ball"></i>&nbsp;&nbsp; Basketball
+                    </button>
+                </div>
+
+                <!-- Football -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Football" name="field"
+                        aria-label="Football">
+                        <i class="fa fa-futbol"></i>&nbsp;&nbsp; Football
+                    </button>
+                </div>
+
+                <!-- Athletics -->
+                <div class="col-12 col-lg-3 p-3">
+                    <button class="custom-card unique-btn" type="submit" value="Athletics" name="field"
+                        aria-label="Athletics">
+                        <i class="fa fa-running"></i>&nbsp;&nbsp; Athletics
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<style>
+   .unique-btn {
+    background: linear-gradient(45deg, rgb(137, 168, 178), rgb(179, 200, 207));
+    color: #fff;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, background 0.3s ease, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.unique-btn:before {
+    content: '';
+    position: absolute;
+    top: -150%;
+    left: -150%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+}
+
+.unique-btn:hover {
+    background: linear-gradient(45deg, rgb(179, 200, 207), rgb(137, 168, 178));
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.unique-btn:hover:before {
+    top: 0;
+    left: 0;
+}
+
+.unique-btn i {
+    font-size: 24px;
+    margin-right: 10px;
+    transition: transform 0.3s;
+}
+
+.unique-btn:hover i {
+    transform: rotate(15deg);
+}
+
+.custom-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgb(179, 200, 207);
+    color: rgba(0, 0, 0, 0.689);
+    /* Light background for contrast */
+}
+
+</style>
+{% endblock content %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container my-4">
+    <!-- First Row: Count Details -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-auto text-center">
+            <button class="btn mt-2" style="background-color: rgb(137, 168, 178);">
+                {{ field }}&nbsp;&nbsp;&nbsp;
+                <span class="badge bg-danger p-1">{{ count }}</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Second Row: Student Details -->
+    <div class="row justify-content-start">
+        {% for data in data %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <!-- Clickable User Card -->
+            <div class="card shadow-sm p-3 d-flex align-items-center flex-row text-decoration-none"
+                style="border-radius: 8px; background-color: #f8f9fa; color: inherit;">
+                <!-- Profile Picture -->
+                {% if data.profile_pic %}
+                <img src="{{ data.profile_pic.url }}" class="rounded-circle me-3 border border-dark"
+                    style="width: 80px; height: 80px; object-fit: cover;" alt="Profile Picture">
+                {% else %}
+                <img src="{% static 'img/default.jpg' %}" class="rounded-circle me-3 border border-dark"
+                    style="width: 80px; height: 80px; object-fit: cover;" alt="Default Profile Picture">
+                {% endif %}
+
+                <!-- User Details -->
+                <div class="flex-grow-1">
+                    <h5 class="mb-1">{{ data.username }}</h5>
+                    <p class="text-muted mb-0">Designation: {{ data.hostel }}</p>
+                    <p class="text-muted mb-0">Email: <a href="mailto:{{ data.email }}">{{ data.email }}</a></p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center text-muted">Not found.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

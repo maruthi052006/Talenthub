@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<div class="container text-center" style="margin-top: 25px;">
+    <form method="post" action="{% url 'dep_list' %}" id="autoSubmitForm">
+        {% csrf_token %}
+        <!-- Departments Section -->
+        <div class="gallery-header">
+            <p><strong>Departments</strong></p>
+            <div class="row justify-content-center">
+                <!-- Artificial Intelligence & Data Science -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit"
+                        value="Artificial Intelligence & Data Science" name="field">
+                        <i class="fa fa-brain"></i>
+                        <span>AI & DS</span>
+                    </button>
+                </div>
+                <!-- Computer Science Engineering -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit" value="Computer Science Engineering"
+                        name="field">
+                        <i class="fa fa-laptop"></i>
+                        <span>CSE</span>
+                    </button>
+                </div>
+                <!-- Information Technology -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit" value="Information Technology" name="field">
+                        <i class="fa fa-code"></i>
+                        <span>IT</span>
+                    </button>
+                </div>
+                <!-- Electronics and Communication Engineering -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit"
+                        value="Electronics and Communication Engineering" name="field">
+                        <i class="fa fa-broadcast-tower"></i>
+                        <span>ECE</span>
+                    </button>
+                </div>
+                <!-- Electrical and Electronics Engineering -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit"
+                        value="Electrical and Electronics Engineering" name="field">
+                        <i class="fa fa-bolt"></i>
+                        <span>EEE</span>
+                    </button>
+                </div>
+                <!-- Mechanical Engineering -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit" value="Mechanical Engineering" name="field">
+                        <i class="fa fa-cogs"></i>
+                        <span>MECH</span>
+                    </button>
+                </div>
+                <!-- Civil Engineering -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit" value="Civil Engineering" name="field">
+                        <i class="fa fa-building"></i>
+                        <span>Civil</span>
+                    </button>
+                </div>
+                <!-- Mechatronics -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit" value="Mechatronics" name="field">
+                        <i class="fa fa-robot"></i>
+                        <span>Mechatronics</span>
+                    </button>
+                </div>
+                <!-- Tamil -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit" value="Tamil" name="field">
+                        <i class="fa fa-language"></i>
+                        <span>Tamil</span>
+                    </button>
+                </div>
+                <!-- English -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit" value="English" name="field">
+                        <i class="fa fa-book"></i>
+                        <span>English</span>
+                    </button>
+                </div>
+                <!-- Mathematics -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit" value="Mathematics" name="field">
+                        <i class="fa fa-calculator"></i>
+                        <span>Math</span>
+                    </button>
+                </div>
+                <!-- Physics -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit" value="Physics" name="field">
+                        <i class="fa fa-atom"></i>
+                        <span>Physics</span>
+                    </button>
+                </div>
+                <!-- Chemistry -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit" value="Chemistry" name="field">
+                        <i class="fa fa-flask"></i>
+                        <span>Chemistry</span>
+                    </button>
+                </div>
+                <!-- Physical Education -->
+                <div class="col-auto p-3">
+                    <button class="custom-card circular-btn" type="submit" value="Physical Education" name="field">
+                        <i class="fa fa-dumbbell"></i>
+                        <span>PE</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .circular-btn {
+        background: linear-gradient(45deg, rgb(137, 168, 178), rgb(179, 200, 207));
+        color: white;
+        border: 2px solid transparent;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        font-size: 18px;
+        font-weight: bold;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .circular-btn i {
+        font-size: 32px;
+        margin-bottom: 5px;
+    }
+
+    .circular-btn span {
+        font-size: 14px;
+        font-weight: normal;
+    }
+
+    .circular-btn:hover {
+        transform: scale(1.1);
+        background: linear-gradient(45deg, rgb(179, 200, 207), rgb(137, 168, 178));
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+</style>
+{% endblock content %}
